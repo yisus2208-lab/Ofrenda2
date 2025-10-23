@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calavera</title>
+</head>
+<body>
+    <canvas id="myCanvas">
+    <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de 
+        secuencias de comandos (por lo general JavaScript ).-->
+</canvas>
+    <!-- script type="importmap" importa las librerías necesarias para three.js-->
+<script type="importmap"> 
+    {
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js" 
+        }
+}
+</script>
+<script type="module"> 
+//🗃️🗃️ Mandar llamar a la librería
+    import * as THREE from 'three'; 
+    import {OrbitControls} from 'three/OrbitControls';
+    console.log(OrbitControls);
+    import {RoundedBoxGeometry} from "./js/RoundedBoxGeometry.js"
+
+//🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+    var renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('myCanvas'), antialias: true,
+    });
+    renderer.setPixelRatio(window.decivePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x27CFF5);
+
+
+// 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+    var scene = new THREE.Scene();
+
+//🎥🎥 Agregar una cámara de perspectiva
+    var camera = new THREE.PerspectiveCamera(70,window.innerWidth / window.innerHeight,0.1,2000
+      );
+    scene.add(camera);
+
+    //Settings de la cámara
+    camera.position.set(0, 100, 100);
+
+    // Añadiendo los OrbitControls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    var gridHelper = new THREE . GridHelper(50,50);
+    scene. add (gridHelper);
+
+    var gridHelper = new THREE.PolarGridHelper (20, 16, 20, 64);
+    //scene.add (gridhelper);
+
+    var gridHelper = new THREE.AxesHelper (0);
+    //scene.add (gridHelper);
+     var light1= new THREE.DirectionalLight(0xF354158,0.8);
+     light1.position.set(50,50,50);
+     scene.add(light1);
+
+     // Espacio para colocar los objetos
+    var geometry01 = new THREE.BoxGeometry (500, 0.5, 500);
+    var material01 = new THREE.MeshLambertMaterial({ color:0xff0000,
+     side: THREE.DoubleSide
+     });
+    var mesh01 = new THREE.Mesh(geometry01,material01);
+    scene.add(mesh01);
+    mesh01.position.set(0,0,0,2);
+
+    //calaverita 
+    var geometry02 = new THREE.SphereGeometry (20,32,32,0,6.30,0,2.2);
+    var material02 = new THREE.MeshBasicMaterial({color:0xc6c6c6 , side: THREE.DoubleSide });
+    var mesh02 = new THREE.Mesh(geometry02,material02);
+    scene.add(mesh02);
+    mesh02.position.set(13,30,0);
+
+    var geometry03 = new THREE.CylinderGeometry (12,15, 7, 50, 8, false, 6.28);
+    var material03 = new THREE.MeshBasicMaterial({color:0xc6c6c6 , side: THREE.DoubleSide });
+    var mesh03 = new THREE.Mesh(geometry03,material03);
+    scene.add(mesh03);
+    mesh03.position.set(13,18,6);
+
+    //ojos 
+    var geometry03 = new THREE.SphereGeometry (5,32,32);
+    var material03 = new THREE.MeshBasicMaterial({color:0x650099, side: THREE.DoubleSide });
+    var mesh04 = new THREE.Mesh(geometry03,material03);
+    scene.add(mesh04);
+    mesh04.position.set(6,35,15);
+
+    var geometry04 = new THREE.SphereGeometry (5,32,32);
+    var material04 = new THREE.MeshBasicMaterial({color:0x650099, side: THREE.DoubleSide });
+    var mesh05 = new THREE.Mesh(geometry04,material04);
+    scene.add(mesh05);
+    mesh05.position.set(20,35,15);
+
+
+    //boca
+    var geometry08 = new THREE.CylinderGeometry (0.5,0.5,5, 50, 8, false, 6.28);
+    var material08 = new THREE.MeshBasicMaterial({color:0x650099 , side: THREE.DoubleSide });
+    var mesh09 = new THREE.Mesh(geometry08,material08);
+    scene.add(mesh09);
+    mesh09.position.set(13,18,20);
+    mesh09.rotation.set(-0.5,0,0);
+
+    var geometry09 = new THREE.CylinderGeometry (0.5,0.5,6, 50, 8, false, 6.28);
+    var material09 = new THREE.MeshBasicMaterial({color:0x650099 , side: THREE.DoubleSide });
+    var mesh010 = new THREE.Mesh(geometry09,material09);
+    scene.add(mesh010);
+    mesh010.position.set(5,18,17);
+    mesh010.rotation.set(-0.5,0,0);
+
+    var geometry010 = new THREE.CylinderGeometry (0.5,0.5,6, 50, 8, false, 6.28);
+    var material010 = new THREE.MeshBasicMaterial({color:0x650099 , side: THREE.DoubleSide });
+    var mesh011 = new THREE.Mesh(geometry010,material010);
+    scene.add(mesh011);
+    mesh011.position.set(21,18,17);
+    mesh011.rotation.set(-0.5,0,0);
+
+    //nariz
+    var geometry011 = new THREE.CapsuleGeometry( 1,1.5, 10, 32 ); 
+    var material011 = new THREE.MeshBasicMaterial( {color:0xd86aff , side: THREE.DoubleSide} ); 
+    var capsule = new THREE.Mesh( geometry011, material011 ); 
+    scene.add( capsule );
+    capsule.position.set(13.5,28,20);
+    capsule.rotation.set(0,0,0.7);
+
+    var geometry012 = new THREE.CapsuleGeometry( 1,1.5, 10, 32 ); 
+    var material012 = new THREE.MeshBasicMaterial( {color:0xd86aff , side: THREE.DoubleSide} ); 
+    var capsule1 = new THREE.Mesh( geometry012, material012 ); 
+    scene.add( capsule1 );
+    capsule1.position.set(12,28,20);
+    capsule1.rotation.set(0,0,-0.7);
+
+    //nariz
+     //🎰🎰Rendering y animación
+    requestAnimationFrame(render);
+    function render() {
+
+    //🪄🪄 Animación - 
+
+    //🎮🎮Actualización del OrbitControls para generar la suavidad de movimiento
+    controls.update();
+
+    //Llamado para renderizar y volver a llamar a la misma función (render)
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+    }
+
+</script>
+</body>
+</html>

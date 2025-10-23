@@ -1,0 +1,278 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title>Práctica 01</title>
+</head>
+<body>
+    
+<canvas id="myCanvas">
+    <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de 
+        secuencias de comandos (por lo general JavaScript ).-->
+</canvas>
+
+<!-- Aquí va todo el código de three.js -->
+<!-- script type="importmap" importa las librerías necesarias para three.js-->
+<script type="importmap"> 
+    {
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js" 
+        }
+}
+</script>
+<script type="module"> 
+//🗃️🗃️ Mandar llamar a la librería
+    import * as THREE from 'three'; 
+    import {OrbitControls} from 'three/OrbitControls';
+    console.log(OrbitControls);
+    import {RoundedBoxGeometry} from "./js/RoundedBoxGeometry.js"
+
+//🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+    var renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('myCanvas'), antialias: true,
+    });
+    renderer.setPixelRatio(window.decivePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x27CFF5);
+
+
+// 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+    var scene = new THREE.Scene();
+
+//🎥🎥 Agregar una cámara de perspectiva
+    var camera = new THREE.PerspectiveCamera(70,window.innerWidth / window.innerHeight,0.1,2000
+      );
+    scene.add(camera);
+
+    //Settings de la cámara
+    camera.position.set(0, 4, 10);
+
+    // Añadiendo los OrbitControls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    var gridHelper = new THREE . GridHelper(50,50);
+    scene. add (gridHelper);
+    var helper = new THREE.PolarGridHelper (20, 16, 20, 64);
+    //scene.add (helper);
+    var axesHelper = new THREE.AxesHelper (500);
+    scene.add (axesHelper);
+//LUZ
+var light1 = new THREE.DirectionalLight(0xffffff,0.8);
+light1.position.set(50,50,50);
+scene.add(light1);
+// Espacio para colocar los objetos
+//Escalera
+var geometry70 = new THREE.BoxGeometry(315,80,145,1,1,1);
+ var material70 = new THREE.MeshLambertMaterial({color:0xff00ff, side: THREE.DoubleSide});
+ var mesh70 = new THREE.Mesh(geometry70,material70);
+mesh70.position.set(0,40.3,-113);
+ scene.add(mesh70);
+//Papel 1 
+var geometry01 = new THREE.PlaneGeometry (95,60,8,8);
+var material01 = new THREE.MeshBasicMaterial({color:0xff0000, side: THREE.DoubleSide});
+var mesh01 = new THREE.Mesh(geometry01,material01);
+scene.add(mesh01);
+mesh01.position.set(-100,45,-40.3);
+
+var geometry02 = new THREE.CircleGeometry (12,40);
+var material02 = new THREE.MeshBasicMaterial({color:0xff0000, side: THREE.DoubleSide});
+var mesh02 = new THREE.Mesh(geometry02,material02);
+scene.add(mesh02);
+mesh02.position.set(-62,14,-40.3);
+
+var geometry03  = new THREE.CircleGeometry (12,40);
+var material03 = new THREE.MeshBasicMaterial({color:0xff0000, side: THREE.DoubleSide});
+var mesh03 = new THREE.Mesh(geometry03,material03);
+scene.add(mesh03);
+mesh03.position.set(-87,14,-40.3);
+
+var geometry04 = new THREE.CircleGeometry (12,40);
+var material04 = new THREE.MeshBasicMaterial({color:0xff0000, side: THREE.DoubleSide});
+var mesh04 = new THREE.Mesh(geometry04,material04);
+scene.add(mesh04);
+mesh04.position.set(-112,14,-40.3);
+
+var geometry05 = new THREE.CircleGeometry (12,40);
+var material05 = new THREE.MeshBasicMaterial({color:0xff0000, side: THREE.DoubleSide});
+var mesh05 = new THREE.Mesh(geometry05,material05);
+scene.add(mesh05);
+mesh05.position.set(-137,14,-40.3);
+
+//Orificios 1
+var geometry06  = new THREE.CircleGeometry (9,40);
+var material06 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh06 = new THREE.Mesh(geometry06,material06);
+scene.add(mesh06);
+mesh06.position.set(-66,63,-40.2);
+
+var geometry07 = new THREE.CircleGeometry (9,40);
+var material07 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh07 = new THREE.Mesh(geometry07,material07);
+scene.add(mesh07);
+mesh07.position.set(-66,29,-40.2);
+
+var geometry08 = new THREE.CircleGeometry (9,40);
+var material08 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh08 = new THREE.Mesh(geometry08,material08);
+scene.add(mesh08);
+mesh08.position.set(-137,63,-40.2);
+
+var geometry09 = new THREE.CircleGeometry (9,40);
+var material09 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh09 = new THREE.Mesh(geometry09,material09);
+scene.add(mesh09);
+mesh09.position.set(-137,29,-40.2);
+
+var geometry10 = new THREE.PlaneGeometry (14,14,8,8);
+var material10 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh10 = new THREE.Mesh(geometry10,material10);
+scene.add(mesh10);
+mesh10.position.set(-100,48,-40.1);
+mesh10.rotation.set(0,0,2.355);
+
+
+
+//Papel 2 
+var geometry11 = new THREE.PlaneGeometry (95,60,8,8);
+var material11 = new THREE.MeshBasicMaterial({color:0x8DEB51, side: THREE.DoubleSide});
+var mesh11 = new THREE.Mesh(geometry11,material11);
+scene.add(mesh11);
+mesh11.position.set(-0,45,-40.3);
+
+var geometry12 = new THREE.CircleGeometry (12,40);
+var material12 = new THREE.MeshBasicMaterial({color:0x8DEB51, side: THREE.DoubleSide});
+var mesh12 = new THREE.Mesh(geometry12,material12);
+scene.add(mesh12);
+mesh12.position.set(-38,14,-40.3);
+
+var geometry13  = new THREE.CircleGeometry (12,40);
+var material13 = new THREE.MeshBasicMaterial({color:0x8DEB51, side: THREE.DoubleSide});
+var mesh13 = new THREE.Mesh(geometry13,material13);
+scene.add(mesh13);
+mesh13.position.set(-13,14,-40.3);
+
+var geometry14 = new THREE.CircleGeometry (12,40);
+var material14 = new THREE.MeshBasicMaterial({color:0x8DEB51, side: THREE.DoubleSide});
+var mesh14 = new THREE.Mesh(geometry14,material14);
+scene.add(mesh14);
+mesh14.position.set(12,14,-40.3);
+
+var geometry15 = new THREE.CircleGeometry (12,40);
+var material15 = new THREE.MeshBasicMaterial({color:0x8DEB51, side: THREE.DoubleSide});
+var mesh15 = new THREE.Mesh(geometry15,material15);
+scene.add(mesh15);
+mesh15.position.set(37,14,-40.3);
+
+//Orificios 2
+var geometry16  = new THREE.CircleGeometry (9,40);
+var material16 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh16 = new THREE.Mesh(geometry16,material16);
+scene.add(mesh16);
+mesh16.position.set(-35,63,-40.2);
+
+var geometry17 = new THREE.CircleGeometry (9,40);
+var material17 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh17 = new THREE.Mesh(geometry17,material17);
+scene.add(mesh17);
+mesh17.position.set(-35,29,-40.2);
+
+var geometry18 = new THREE.CircleGeometry (9,40);
+var material18 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh18 = new THREE.Mesh(geometry18,material18);
+scene.add(mesh18);
+mesh18.position.set(35,63,-40.2);
+
+var geometry19 = new THREE.CircleGeometry (9,40);
+var material19 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh19 = new THREE.Mesh(geometry19,material19);
+scene.add(mesh19);
+mesh19.position.set(35,29,-40.2);
+
+var geometry20 = new THREE.PlaneGeometry (14,14,8,8);
+var material20 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh20 = new THREE.Mesh(geometry20,material20);
+scene.add(mesh20);
+mesh20.position.set(0,48,-40.1);
+mesh20.rotation.set(0,0,2.355);
+
+//Papel 3
+var geometry21 = new THREE.PlaneGeometry (95,60,8,8);
+var material21 = new THREE.MeshBasicMaterial({color:0xFFFF00, side: THREE.DoubleSide});
+var mesh21 = new THREE.Mesh(geometry21,material21);
+scene.add(mesh21);
+mesh21.position.set(100,45,-40.3);
+
+var geometry22 = new THREE.CircleGeometry (12,40);
+var material22 = new THREE.MeshBasicMaterial({color:0xFFFF00, side: THREE.DoubleSide});
+var mesh22 = new THREE.Mesh(geometry22,material22);
+scene.add(mesh22);
+mesh22.position.set(62,14,-40.3);
+
+var geometry23  = new THREE.CircleGeometry (12,40);
+var material23 = new THREE.MeshBasicMaterial({color:0xFFFF00, side: THREE.DoubleSide});
+var mesh23 = new THREE.Mesh(geometry23,material23);
+scene.add(mesh23);
+mesh23.position.set(87,14,-40.3);
+
+var geometry24 = new THREE.CircleGeometry (12,40);
+var material24 = new THREE.MeshBasicMaterial({color:0xFFFF00, side: THREE.DoubleSide});
+var mesh24 = new THREE.Mesh(geometry24,material24);
+scene.add(mesh24);
+mesh24.position.set(112,14,-40.3);
+
+var geometry25 = new THREE.CircleGeometry (12,40);
+var material25 = new THREE.MeshBasicMaterial({color:0xFFFF00, side: THREE.DoubleSide});
+var mesh25 = new THREE.Mesh(geometry25,material25);
+scene.add(mesh25);
+mesh25.position.set(137,14,-40.3);
+
+//Orificios 3
+var geometry26  = new THREE.CircleGeometry (9,40);
+var material26 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh26 = new THREE.Mesh(geometry26,material26);
+scene.add(mesh26);
+mesh26.position.set(66,63,-40.2);
+
+var geometry27 = new THREE.CircleGeometry (9,40);
+var material27 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh27 = new THREE.Mesh(geometry27,material27);
+scene.add(mesh27);
+mesh27.position.set(66,29,-40.2);
+
+var geometry28 = new THREE.CircleGeometry (9,40);
+var material28 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh28 = new THREE.Mesh(geometry28,material28);
+scene.add(mesh28);
+mesh28.position.set(137,63,-40.2);
+
+var geometry29 = new THREE.CircleGeometry (9,40);
+var material29 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh29 = new THREE.Mesh(geometry29,material29);
+scene.add(mesh29);
+mesh29.position.set(137,29,-40.2);
+
+var geometry30 = new THREE.PlaneGeometry (14,14,8,8);
+var material30 = new THREE.MeshBasicMaterial({color:0xff00ff, side: THREE.DoubleSide});
+var mesh30 = new THREE.Mesh(geometry30,material30);
+scene.add(mesh30);
+mesh30.position.set(100,48,-40.1);
+mesh30.rotation.set(0,0,2.355);
+
+//🎰🎰Rendering y animación
+    requestAnimationFrame(render);
+    function render() {
+
+    //🪄🪄 Animación - 
+
+    //🎮🎮Actualización del OrbitControls para generar la suavidad de movimiento
+    controls.update();
+
+    //Llamado para renderizar y volver a llamar a la misma función (render)
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+    }
+</script>
+</body>
+</html>

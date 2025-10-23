@@ -1,0 +1,115 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title>Examen</title>
+</head>
+<body>
+    
+<canvas id="myCanvas">
+    <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de 
+        secuencias de comandos (por lo general JavaScript ).-->
+</canvas>
+
+<!-- Aquí va todo el código de three.js -->
+<!-- script type="importmap" importa las librerías necesarias para three.js-->
+ <script src="./font/Minecrafter Alt_Regular.js"></script>
+<script type="importmap"> 
+    {
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js" 
+        }
+}
+</script>
+<script type="module"> 
+//🗃️🗃️ Mandar llamar a la librería
+    import * as THREE from 'three'; 
+    import {OrbitControls} from 'three/OrbitControls';
+    console.log(OrbitControls);
+    import {RoundedBoxGeometry} from "./js/RoundedBoxGeometry.js"
+
+    import {TextGeometry} from "./js/TextGeometry.js";
+    import {FontLoader} from "./js/FontLoader.js";
+
+
+//🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+    var renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('myCanvas'), antialias: true,
+    });
+    renderer.setPixelRatio(window.decivePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x616161);
+
+
+// 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+    var scene = new THREE.Scene();
+
+//🎥🎥 Agregar una cámara de perspectiva
+    var camera = new THREE.PerspectiveCamera(70,window.innerWidth / window.innerHeight,0.1,2000
+      );
+    scene.add(camera);
+
+    //Settings de la cámara
+    camera.position.set(0, 4, 10);
+
+    // Añadiendo los OrbitControls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    var gridHelper = new THREE . GridHelper(50,50);
+    //scene. add (gridHelper);
+    var helper = new THREE.PolarGridHelper (20, 16, 20, 64);
+    //scene.add (helper);
+    var axesHelper = new THREE.AxesHelper (500);
+    //scene.add (axesHelper);
+//LUZ
+var light1 = new THREE.DirectionalLight(0xffffff,1.1);
+light1.position.set(50,50,50);
+//scene.add(light1);
+
+var pluz1 = new THREE.PointLight(0x8F00FF,20,20,1);
+pluz1.position.set(0,18,0);
+scene.add(pluz1);
+var helper1 = new THREE.PointLightHelper(pluz1);
+scene.add(helper1);
+
+
+//Sombra
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+var light = new THREE.DirectionalLight(0xffffff,1.2);
+light.position.set(0,50,40);
+light.target.position.set(0,0,0);//cuando hay sombra
+light.castShadow = true;
+light.shadow.bias = 0.01;
+light.shadow.mapSize.width = 512*3;
+light.shadow.mapSize.height = 512*3;
+
+light.shadow.camera.top=25;
+light.shadow.camera.right=25;
+light.shadow.camera.left=-25;
+light.shadow.camera.bottom=-25;
+light.shadow.camera.visible=true;
+var directionalHelper = new THREE.CameraHelper(light.shadow.camera);
+//scene.add(directionalHelper);
+scene.add(light);
+// Espacio para colocar los objetos
+
+
+//🎰🎰Rendering y animación
+    requestAnimationFrame(render);
+    function render() {
+
+    //🪄🪄 Animación - 
+//texto.rotation.y += 0.01;
+    //🎮🎮Actualización del OrbitControls para generar la suavidad de movimiento
+    controls.update();
+
+    //Llamado para renderizar y volver a llamar a la misma función (render)
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+    }
+</script>
+</body>
+</html>

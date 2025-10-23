@@ -1,0 +1,412 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <title>Flor</title>
+</head>
+<body>
+    
+<canvas id="myCanvas">
+    <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de 
+        secuencias de comandos (por lo general JavaScript ).-->
+</canvas>
+
+<!-- Aquí va todo el código de three.js -->
+<!-- script type="importmap" importa las librerías necesarias para three.js-->
+<script type="importmap"> 
+    {
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js" 
+        }
+}
+</script>
+<script type="module"> 
+//🗃️🗃️ Mandar llamar a la librería
+    import * as THREE from 'three'; 
+    import {OrbitControls} from 'three/OrbitControls';
+    console.log(OrbitControls);
+
+//🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+    var renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('myCanvas'), antialias: true,
+    });
+    renderer.setPixelRatio(window.decivePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0xFFC8DD);
+
+
+// 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+    var scene = new THREE.Scene();
+
+//🎥🎥 Agregar una cámara de perspectiva
+    var camera = new THREE.PerspectiveCamera(70,window.innerWidth / window.innerHeight,0.1,2000
+      );
+    scene.add(camera);
+
+    //Settings de la cámara
+    camera.position.set(0, 4, 10);
+
+    // Añadiendo los OrbitControls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    var gridHelper = new THREE.GridHelper(50,50);
+    scene.add (gridHelper);
+
+    var axesHelper = new THREE.AxesHelper(500);
+    scene.add (axesHelper);
+
+   // var helper = new THREE.PolarGridHelper(10,16,10,64);
+   // scene.add (helper);
+
+// Espacio para colocar los objetos
+// Luz
+var light = new THREE.DirectionalLight(0xffffff, 0.9);
+light.position.set(5, 10, 7);
+scene.add(light);
+var amb = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(amb);
+
+//Flor de Cempasúchil 
+
+// Centro de la flor
+var geometryCentro = new THREE.CircleGeometry(1.5, 32);
+var materialCentro = new THREE.MeshBasicMaterial({
+  color: 0xFFB100,
+  side: THREE.DoubleSide
+});
+var centro = new THREE.Mesh(geometryCentro, materialCentro);
+scene.add(centro);
+centro.position.set(0, 0, 0);
+centro.rotation.x = 1.5708; // π/2 rad
+
+// Primer anillo de pétalos (12 pétalos)
+var geometryPetalo1 = new THREE.ConeGeometry(2, 3, 20, 1, false);
+var materialPetalo1 = new THREE.MeshBasicMaterial({
+  color: 0xFFA500,
+  side: THREE.DoubleSide
+});
+
+//petalo1
+var petalo1 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo1.position.set(2.5, 0, 0);
+petalo1.rotation.set(1.5708, 0, 0);
+scene.add(petalo1);
+
+//Petalo2
+var petalo2 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo2.position.set(2.165, 0, 1.25);
+petalo2.rotation.set(1.5708, 0, 0.5236);
+scene.add(petalo2);
+
+//Petalo3
+var petalo3 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo3.position.set(1.25, 0, 2.165);
+petalo3.rotation.set(1.5708, 0, 1.0472);
+scene.add(petalo3);
+
+//Petalo4
+var petalo4 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo4.position.set(0, 0, 2.5);
+petalo4.rotation.set(1.5708, 0, 1.5708);
+scene.add(petalo4);
+
+//Petalo5
+var petalo5 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo5.position.set(-1.25, 0, 2.165);
+petalo5.rotation.set(1.5708, 0, 2.0944);
+scene.add(petalo5);
+
+//Petalo6
+var petalo6 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo6.position.set(-2.165, 0, 1.25);
+petalo6.rotation.set(1.5708, 0, 2.618);
+scene.add(petalo6);
+
+//Petalo7
+var petalo7 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo7.position.set(-2.5, 0, 0);
+petalo7.rotation.set(1.5708, 0, 3.1416);
+scene.add(petalo7);
+
+//Petalo8
+var petalo8 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo8.position.set(-2.165, 0, -1.25);
+petalo8.rotation.set(1.5708, 0, 3.6652);
+scene.add(petalo8);
+
+//Petalo9
+var petalo9 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo9.position.set(-1.25, 0, -2.165);
+petalo9.rotation.set(1.5708, 0, 4.1888);
+scene.add(petalo9);
+
+//Petalo10
+var petalo10 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo10.position.set(0, 0, -2.5);
+petalo10.rotation.set(1.5708, 0, 4.7124);
+scene.add(petalo10);
+
+//Petalo11
+var petalo11 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo11.position.set(1.25, 0, -2.165);
+petalo11.rotation.set(1.5708, 0, 5.236);
+scene.add(petalo11);
+
+//Petalo12
+var petalo12 = new THREE.Mesh(geometryPetalo1, materialPetalo1);
+petalo12.position.set(2.165, 0, -1.25);
+petalo12.rotation.set(1.5708, 0, 5.7596);
+scene.add(petalo12);
+
+// Segundo anillo (16 pétalos)
+var geometryPetalo2 = new THREE.ConeGeometry(2.5, 4, 20, 1, false);
+var materialPetalo2 = new THREE.MeshBasicMaterial({
+  color: 0xFF8C00,
+  side: THREE.DoubleSide
+});
+
+//Petalo1
+var petalo13 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo13.position.set(4, 0, 0);
+petalo13.rotation.set(1.5708, 0, 0);
+scene.add(petalo13);
+
+//Petalo2
+var petalo14 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo14.position.set(3.695, 0, 1.53);
+petalo14.rotation.set(1.5708, 0, 0.3927);
+scene.add(petalo14);
+
+//Petalo3
+var petalo15 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo15.position.set(2.83, 0, 2.83);
+petalo15.rotation.set(1.5708, 0, 0.7854);
+scene.add(petalo15);
+
+//Petalo4
+var petalo16 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo16.position.set(1.53, 0, 3.695);
+petalo16.rotation.set(1.5708, 0, 1.1781);
+scene.add(petalo16);
+
+//Petalo5
+var petalo17 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo17.position.set(0, 0, 4);
+petalo17.rotation.set(1.5708, 0, 1.5708);
+scene.add(petalo17);
+
+//Petalo6
+var petalo18 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo18.position.set(-1.53, 0, 3.695);
+petalo18.rotation.set(1.5708, 0, 1.9635);
+scene.add(petalo18);
+
+//Petalo7
+var petalo19 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo19.position.set(-2.83, 0, 2.83);
+petalo19.rotation.set(1.5708, 0, 2.3562);
+scene.add(petalo19);
+
+//Petalo8
+var petalo20 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo20.position.set(-3.695, 0, 1.53);
+petalo20.rotation.set(1.5708, 0, 2.7489);
+scene.add(petalo20);
+
+//Petalo9
+var petalo21 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo21.position.set(-4, 0, 0);
+petalo21.rotation.set(1.5708, 0, 3.1416);
+scene.add(petalo21);
+
+//Petalo10
+var petalo22 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo22.position.set(-3.695, 0, -1.53);
+petalo22.rotation.set(1.5708, 0, 3.5343);
+scene.add(petalo22);
+
+//Petalo11
+var petalo23 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo23.position.set(-2.83, 0, -2.83);
+petalo23.rotation.set(1.5708, 0, 3.927);
+scene.add(petalo23);
+
+//Petalo12
+var petalo24 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo24.position.set(-1.53, 0, -3.695);
+petalo24.rotation.set(1.5708, 0, 4.3197);
+scene.add(petalo24);
+
+//Petalo13
+var petalo25 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo25.position.set(0, 0, -4);
+petalo25.rotation.set(1.5708, 0, 4.7124);
+scene.add(petalo25);
+
+//Petalo14
+var petalo26 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo26.position.set(1.53, 0, -3.695);
+petalo26.rotation.set(1.5708, 0, 5.1051);
+scene.add(petalo26);
+
+//Petalo15
+var petalo27 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo27.position.set(2.83, 0, -2.83);
+petalo27.rotation.set(1.5708, 0, 5.4978);
+scene.add(petalo27);
+
+//Petalo16
+var petalo28 = new THREE.Mesh(geometryPetalo2, materialPetalo2);
+petalo28.position.set(3.695, 0, -1.53);
+petalo28.rotation.set(1.5708, 0, 5.8905);
+scene.add(petalo28);
+
+// Tercer anillo (21 pétalos)
+var geometryPetalo3 = new THREE.ConeGeometry(3, 4, 20, 1, false);
+var materialPetalo3 = new THREE.MeshBasicMaterial({
+  color: 0xFF7500,
+  side: THREE.DoubleSide
+});
+
+//Petalo1
+var petalo29 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo29.position.set(5.5, 0, 0);
+petalo29.rotation.set(1.5708, 0, 0);
+scene.add(petalo29);
+
+//Petalo2
+var petalo30 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo30.position.set(5.225, 0, 1.71);
+petalo30.rotation.set(1.5708, 0, 0.3142);
+scene.add(petalo30);
+
+//Petalo3
+var petalo31 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo31.position.set(4.46, 0, 3.17);
+petalo31.rotation.set(1.5708, 0, 0.6283);
+scene.add(petalo31);
+
+//Petalo4
+var petalo32 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo32.position.set(3.17, 0, 4.46);
+petalo32.rotation.set(1.5708, 0, 0.9425);
+scene.add(petalo32);
+
+// Pétalo 5
+var petalo33 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo33.position.set(0, 0, 5.5);
+petalo33.rotation.set(1.5708, 0, 1.5708);
+scene.add(petalo33);
+
+// Pétalo 6
+var petalo34 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo34.position.set(-1.7, 0, 5.2);
+petalo34.rotation.set(1.5708, 0, 1.885);
+scene.add(petalo34);
+
+// Pétalo 7
+var petalo35 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo35.position.set(-3.1, 0, 4.4);
+petalo35.rotation.set(1.5708, 0, 2.1991);
+scene.add(petalo35);
+
+// Pétalo 8
+var petalo36 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo36.position.set(-4.4, 0, 3.1);
+petalo36.rotation.set(1.5708, 0, 2.5133);
+scene.add(petalo36);
+
+// Pétalo 9
+var petalo37 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo37.position.set(-5.2, 0, 1.7);
+petalo37.rotation.set(1.5708, 0, 2.8274);
+scene.add(petalo37);
+
+// Pétalo 10
+var petalo38 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo38.position.set(-5.5, 0, 0);
+petalo38.rotation.set(1.5708, 0, 3.1416);
+scene.add(petalo38);
+
+// Pétalo 11
+var petalo39 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo39.position.set(-5.2, 0, -1.7);
+petalo39.rotation.set(1.5708, 0, 3.4558);
+scene.add(petalo39);
+
+// Pétalo 12
+var petalo40 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo40.position.set(-4.4, 0, -3.1);
+petalo40.rotation.set(1.5708, 0, 3.7699);
+scene.add(petalo40);
+
+// Pétalo 13
+var petalo41 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo41.position.set(-3.1, 0, -4.4);
+petalo41.rotation.set(1.5708, 0, 4.0841);
+scene.add(petalo41);
+
+// Pétalo 14
+var petalo42 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo42.position.set(-1.7, 0, -5.2);
+petalo42.rotation.set(1.5708, 0, 4.3982);
+scene.add(petalo42);
+
+// Pétalo 15
+var petalo43 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo43.position.set(0, 0, -5.5);
+petalo43.rotation.set(1.5708, 0, 4.7124);
+scene.add(petalo43);
+
+// Pétalo 16
+var petalo44 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo44.position.set(1.7, 0, -5.2);
+petalo44.rotation.set(1.5708, 0, 5.0265);
+scene.add(petalo44);
+
+// Pétalo 17
+var petalo45 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo45.position.set(3.1, 0, -4.4);
+petalo45.rotation.set(1.5708, 0, 5.3407);
+scene.add(petalo45);
+
+
+//Petalo18
+var petalo46 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo46.position.set(3.17, 0, 4.46);
+petalo46.rotation.set(1.5708, 0, 0.9425);
+scene.add(petalo46);
+
+// Pétalo 19
+var petalo47 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo47.position.set(4.4, 0, -3.1);
+petalo47.rotation.set(1.5708, 0, 5.6548);
+scene.add(petalo47);
+
+
+// Pétalo 20
+var petalo48 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo48.position.set(5.2, 0, -1.7);
+petalo48.rotation.set(1.5708, 0, 5.969);
+scene.add(petalo48);
+
+// Pétalo 21
+var petalo49 = new THREE.Mesh(geometryPetalo3, materialPetalo3);
+petalo49.position.set(5.5, 0, 0.2);
+petalo49.rotation.set(1.5708, 0, 0.1);
+//scene.add(petalo49);
+
+
+// Render
+function render() {
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(render);
+}
+render();
+
+</script>
+</body>
+</html>

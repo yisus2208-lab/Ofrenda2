@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Estructura</title>
+</head>
+<body>
+    <canvas id="myCanvas">
+    <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de 
+        secuencias de comandos (por lo general JavaScript ).-->
+</canvas>
+    <!-- script type="importmap" importa las librerías necesarias para three.js-->
+<script type="importmap"> 
+    {
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js" 
+        }
+}
+</script>
+<script type="module"> 
+//🗃️🗃️ Mandar llamar a la librería
+    import * as THREE from 'three'; 
+    import {OrbitControls} from 'three/OrbitControls';
+    console.log(OrbitControls);
+    import {RoundedBoxGeometry} from "./js/RoundedBoxGeometry.js"
+
+//🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+    var renderer = new THREE.WebGLRenderer({
+    canvas: document.getElementById('myCanvas'), antialias: true,
+    });
+    renderer.setPixelRatio(window.decivePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x27CFF5);
+
+
+// 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+    var scene = new THREE.Scene();
+
+//🎥🎥 Agregar una cámara de perspectiva
+    var camera = new THREE.PerspectiveCamera(70,window.innerWidth / window.innerHeight,0.1,2000
+      );
+    scene.add(camera);
+
+    //Settings de la cámara
+    camera.position.set(0, 100, 100);
+
+    // Añadiendo los OrbitControls
+    var controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    var gridHelper = new THREE . GridHelper(50,50);
+    scene. add (gridHelper);
+
+    var gridHelper = new THREE.PolarGridHelper (20, 16, 20, 64);
+    //scene.add (gridhelper);
+
+    var gridHelper = new THREE.AxesHelper (0);
+    //scene.add (gridHelper);
+     var light1= new THREE.DirectionalLight(0xFFFFFF,0.8);
+     light1.position.set(50,50,50);
+     scene.add(light1);
+
+     // Espacio para colocar los objetos
+    var geometry01 = new THREE.BoxGeometry (500, 0.5, 500);
+    var material01 = new THREE.MeshLambertMaterial({ color:0x00fff1,
+     side: THREE.DoubleSide
+     });
+    var mesh01 = new THREE.Mesh(geometry01,material01);
+    scene.add(mesh01);
+    mesh01.position.set(0,0,0,2);
+
+    //cuerpo de botella
+    var geometry02 = new THREE.CylinderGeometry (6, 6, 35, 50, 8, false, 6.28);
+    var texture = new THREE.TextureLoader().load("./image/vidrio1.jpg");
+    var material02 = new THREE.MeshBasicMaterial({map: texture });
+    var mesh02 = new THREE.Mesh(geometry02,material02);
+    scene.add(mesh02);
+    mesh02.position.set(1,32.5,-7);
+    texture.wrapS=THREE.RepeatWrapping;
+    texture.wrapT=THREE.RepeatWrapping;
+
+    var geometry03 = new THREE.CylinderGeometry (3.5, 6, 5, 50, 8, false, 6.28);
+    var material03 = new THREE.MeshBasicMaterial({color:0x224D22 , side: THREE.DoubleSide });
+    var mesh03 = new THREE.Mesh(geometry03,material03);
+    scene.add(mesh03);
+    mesh03.position.set(1,52.5,-7);
+
+    var geometry04 = new THREE.CylinderGeometry (3,3.5, 20, 50, 8, false, 6.28);
+    var material02 = new THREE.MeshBasicMaterial({color:0x224D22 , side: THREE.DoubleSide });
+    var mesh04 = new THREE.Mesh(geometry04,material02);
+    scene.add(mesh04);
+    mesh04.position.set(1,57.5,-7);
+    
+    //tapa
+    var geometry05 = new THREE.CylinderGeometry (3.5,3.5,5, 50, 8, false, 6.28);
+    var material04 = new THREE.MeshBasicMaterial({color:0x637063 , side: THREE.DoubleSide });
+    var mesh05 = new THREE.Mesh(geometry05,material04);
+    scene.add(mesh05);
+    mesh05.position.set(1,70,-7);
+ 
+    //etiqueta 
+    var geometry06 = new THREE.CylinderGeometry (6,6,15, 50, 8, true, 5.3, 2);
+    var texture02 = new THREE.TextureLoader().load("./image/vidrio.jpg");
+    var material05 = new THREE.MeshBasicMaterial({map: texture02 });
+    var mesh06 = new THREE.Mesh(geometry06,material05);
+    scene.add(mesh06);
+    mesh06.position.set(1,40,-6.9);
+    texture.wrapS=THREE.RepeatWrapping;
+    texture.wrapT=THREE.RepeatWrapping;
+
+
+
+
+     //🎰🎰Rendering y animación
+    requestAnimationFrame(render);
+    function render() {
+
+    //🪄🪄 Animación - 
+
+    //🎮🎮Actualización del OrbitControls para generar la suavidad de movimiento
+    controls.update();
+
+    //Llamado para renderizar y volver a llamar a la misma función (render)
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+    }
+
+</script>
+</body>
+</html>
